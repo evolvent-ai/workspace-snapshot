@@ -1,0 +1,6 @@
+{
+  "access_key_id": "UPLOAD_ONLY_ACCESS_KEY_ID",
+  "access_key_secret": "UPLOAD_ONLY_ACCESS_KEY_SECRET",
+  "destination": "oss://seed-data/workspace/",
+  "endpoint": "https://oss-cn-hangzhou.aliyuncs.com"
+}

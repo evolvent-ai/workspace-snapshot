@@ -1,0 +1,23 @@
+[
+  {
+    "target": "aarch64-apple-darwin",
+    "name": "cpython-3.12.16+20261123-aarch64-apple-darwin-install_only_stripped.tar.gz",
+    "url": "https://github.com/astral-sh/python-build-standalone/releases/download/20261123/cpython-3.12.16%2B20261123-aarch64-apple-darwin-install_only_stripped.tar.gz",
+    "bytes": 25260089,
+    "digest": "sha256:0de87cfc2649849da10a54084f87fd01fa1e653478e32eee92198c213550e15c"
+  },
+  {
+    "target": "x86_64-apple-darwin",
+    "name": "cpython-3.12.16+20261123-x86_64-apple-darwin-install_only_stripped.tar.gz",
+    "url": "https://github.com/astral-sh/python-build-standalone/releases/download/20261123/cpython-3.12.16%2B20261123-x86_64-apple-darwin-install_only_stripped.tar.gz",
+    "bytes": 24997878,
+    "digest": "sha256:da628e539cebac13f43a3dc42dd99826aeab254387d3bc43478a73267a362713"
+  },
+  {
+    "target": "x86_64-pc-windows-msvc",
+    "name": "cpython-3.12.16+20261123-x86_64-pc-windows-msvc-install_only_stripped.tar.gz",
+    "url": "https://github.com/astral-sh/python-build-standalone/releases/download/20261123/cpython-3.12.16%2B20261123-x86_64-pc-windows-msvc-install_only_stripped.tar.gz",
+    "bytes": 22388474,
+    "digest": "sha256:75988f49393727d7e53b673d50088e7f809a629dd37cb59da3756479bc6ea5c1"
+  }
+]

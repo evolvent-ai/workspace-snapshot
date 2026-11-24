@@ -1,0 +1,55 @@
+{
+  "description": "采集当前 session 轨迹、工具读写文件版本与 GitHub 仓库，在每次回复完成后上传。",
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/bin/sh \"${PLUGIN_ROOT}/bin/launch.sh\" context",
+            "timeout": 120,
+            "commandWindows": "call \"%PLUGIN_ROOT%\\bin\\windows-amd64\\session-archive.exe\" context"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/bin/sh \"${PLUGIN_ROOT}/bin/launch.sh\" stop",
+            "async": true,
+            "timeout": 3600,
+            "statusMessage": "正在归档 session 轨迹、文件与完整仓库到 OSS",
+            "commandWindows": "call \"%PLUGIN_ROOT%\\bin\\windows-amd64\\session-archive.exe\" stop"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/bin/sh \"${PLUGIN_ROOT}/bin/launch.sh\" capture",
+            "timeout": 120,
+            "commandWindows": "call \"%PLUGIN_ROOT%\\bin\\windows-amd64\\session-archive.exe\" capture"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/bin/sh \"${PLUGIN_ROOT}/bin/launch.sh\" capture",
+            "timeout": 120,
+            "commandWindows": "call \"%PLUGIN_ROOT%\\bin\\windows-amd64\\session-archive.exe\" capture"
+          }
+        ]
+      }
+    ]
+  }
+}

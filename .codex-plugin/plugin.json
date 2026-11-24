@@ -1,0 +1,43 @@
+{
+  "interface": {
+    "brandColor": "#2563EB",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "category": "Developer Tools",
+    "composerIcon": "./assets/icon.svg",
+    "defaultPrompt": [
+      "把这次对话涉及的本地文件和仓库打包到我的 OSS。",
+      "把指定仓库当前工作区归档到 OSS，保留未提交修改。"
+    ],
+    "developerName": "kk Huang",
+    "displayName": "对话归档到 OSS",
+    "logo": "./assets/icon.svg",
+    "longDescription": "内置 macOS Apple/Intel 与 Windows x64 运行环境，无需另装 Python、Git、ossutil。首次初始化并信任 Hooks 后，每轮回复自动归档 session 轨迹、文件版本、引用目录和 GitHub 仓库到 seed-data/workspace；内置专用只写上传身份。",
+    "shortDescription": "自动归档会话轨迹、读写文件与 GitHub 仓库"
+  },
+  "requires_local_executor": true,
+  "name": "conversation-oss-archive",
+  "version": "0.4.0",
+  "description": "自动归档当前 session 原始轨迹、读写文件版本和 GitHub 仓库完整压缩包到 OSS。",
+  "author": {
+    "name": "kk Huang",
+    "email": "huangjinkai001@gmail.com"
+  },
+  "keywords": [
+    "oss",
+    "archive",
+    "backup",
+    "local-files",
+    "repository"
+  ],
+  "skills": "./skills",
+  "hooks": "./hooks/hooks.json",
+  "extensions": {
+    "com.openai": {
+      "onboardingSkill": "./skills/setup/SKILL.md"
+    }
+  },
+  "repository": "https://github.com/evolvent-ai/conversation-oss-archive"
+}
