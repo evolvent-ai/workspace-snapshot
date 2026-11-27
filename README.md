@@ -87,8 +87,8 @@ Markdown、图片、ZIP、隐藏文件和嵌套子目录都会保存，不需要
 
 ## GitHub 源码与安装包
 
-本仓库保存源码、测试、权限策略和可复现构建入口。源码不包含真实 AK/SK、个人会话轨迹、
-本机回执、CPython 运行时或已生成的 ZIP。可直接安装的便携包通过本仓库的私有 Releases 分发；
+本仓库保存源码、测试、权限策略、可复现构建入口和私有市场分发目录。根目录源码不包含真实 AK/SK、
+个人会话轨迹或本机回执。市场目录随附完整便携 ZIP；私有 Releases 也保留独立下载入口；
 这些便携包按插件拥有者的要求包含专用只写上传凭据，必须保持在授权的私有范围内。
 GitHub 源码推送不会自动更新 ChatGPT 账户中已发布的插件版本。
 
@@ -117,3 +117,42 @@ CONVERSATION_OSS_PORTABLE_GIT=1 PYTHONPATH=hooks .venv/bin/python -m unittest di
 构建会核对 `deploy/runtime-assets.json` 中固定版本的官方 CPython SHA256，打包纯 Python Git
 依赖并交叉编译三个原生启动程序，输出到 `dist/`。运行时和生成物位于 Git 忽略目录。
 实际构建和运行验证状态见上面的 0.4.0 说明。
+
+
+## 通过 Marketplace 界面安装（推荐）
+
+本仓库已提供 `.agents/plugins/marketplace.json`，市场名为 `evolvent-session-archive`，
+界面显示 **Evolvent · Session Archive**。市场插件在 `plugins/conversation-oss-archive/`。
+
+1. 在 Codex / ChatGPT 桌面端打开 **Plugins / 插件**。
+2. 点 **Add / 添加 → Add marketplace / 添加市场**。
+3. Source 填 `evolvent-ai/conversation-oss-archive`（也可用仓库 HTTPS 地址）。
+4. Git ref 填 `main`，Sparse paths 留空，添加市场。
+5. 在 **Evolvent · Session Archive** 下安装 **对话归档到 OSS**。
+6. 运行插件的初始化流程，然后在 **设置 → Hooks** 审阅信任四项钩子。
+
+这是私有仓库，添加市场所用的 GitHub 身份必须有仓库读取权限。若出现权限提示，先完成
+该客户端的 GitHub 授权；分享仓库 URL 本身不授予访问权限。
+
+完整便携 ZIP 随市场插件一起获取，安装时不需要另开 Release 下载，也不依赖系统 Python、
+Git、ossutil。首次初始化用原生 bootstrap 核对 SHA256、解压运行环境，再注册同一套用户级
+Hooks；市场包装层不额外加载插件级 Hooks，避免重复上传。
+包装层版本 `0.4.1`，便携运行包版本 `0.4.0`。便携包仍包含之前授权内置的只写上传身份，
+因此市场仓库必须保持私有并仅授予允许使用该身份的人访问。
+
+CLI 等价操作：
+
+```bash
+codex plugin marketplace add evolvent-ai/conversation-oss-archive --ref main
+codex plugin add conversation-oss-archive@evolvent-session-archive
+```
+
+### 更新市场分发包
+
+```bash
+python3 scripts/update_marketplace_payload.py --payload /private/path/conversation-oss-archive-NEW.zip --version NEW_MARKETPLACE_VERSION
+git add .agents/plugins/marketplace.json plugins/conversation-oss-archive
+```
+
+更新会同时重建三平台 bootstrap，将 payload 的 SHA256 固定在程序内。
+不要只替换 portable.zip 而不重建 bootstrap，也不要将 ZIP 换成 Git LFS 指针。

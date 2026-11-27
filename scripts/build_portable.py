@@ -67,7 +67,7 @@ def main():
     cache = build / 'cache'; cache.mkdir(exist_ok=True)
     stage = build / 'stage' / ROOT.name
     if stage.exists(): shutil.rmtree(stage)
-    shutil.copytree(ROOT, stage, ignore=shutil.ignore_patterns('.git','.build','dist','.venv','venv',
+    shutil.copytree(ROOT, stage, ignore=shutil.ignore_patterns('.git','.agents','plugins','marketplace-bootstrap','.build','dist','.venv','venv',
         '__pycache__','*.pyc','runtime','vendor','oss-upload.json','*.zip','*.tar.gz'))
     assets = json.loads((ROOT / 'deploy/runtime-assets.json').read_text())
     with ThreadPoolExecutor(max_workers=3) as pool:

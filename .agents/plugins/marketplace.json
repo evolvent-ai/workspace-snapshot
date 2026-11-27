@@ -1,0 +1,12 @@
+{
+  "name": "evolvent-session-archive",
+  "interface": {"displayName": "Evolvent · Session Archive"},
+  "plugins": [
+    {
+      "name": "conversation-oss-archive",
+      "source": {"source": "local", "path": "./plugins/conversation-oss-archive"},
+      "policy": {"installation": "AVAILABLE", "authentication": "ON_INSTALL"},
+      "category": "Developer Tools"
+    }
+  ]
+}

@@ -17,3 +17,9 @@ config/oss-upload.json
 bin/darwin-arm64/
 bin/darwin-amd64/
 bin/windows-amd64/
+
+# Private marketplace distribution: the payload is the authorized portable release.
+!plugins/conversation-oss-archive/portable.zip
+!plugins/conversation-oss-archive/bin/darwin-arm64/
+!plugins/conversation-oss-archive/bin/darwin-amd64/
+!plugins/conversation-oss-archive/bin/windows-amd64/
