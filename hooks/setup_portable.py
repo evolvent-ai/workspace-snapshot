@@ -30,7 +30,7 @@ def setup(plugin_root):
         else:
             command = shlex.join(['env','PLUGIN_DATA='+str(data),'/bin/sh',str(target/'bin/launch.sh'),mode])
         entries = document.setdefault('hooks', {}).setdefault(event, [])
-        kept = [group for group in entries if not any('conversation-oss-archive' in handler.get('command','') for handler in group.get('hooks',[]))]
+        kept = [group for group in entries if not any(any(name in handler.get('command','') for name in ('conversation-oss-archive','workspace-snapshot')) for handler in group.get('hooks',[]))]
         handler = {'type':'command','command':command,'timeout':3600 if event=='Stop' else 120}
         if event=='Stop': handler.update({'async':True,'statusMessage':'正在归档 session 到 seed-data/workspace'})
         kept.append({'hooks':[handler]}); document['hooks'][event]=kept

@@ -1,3 +1,3 @@
-module conversation-oss-archive/launcher
+module workspace-snapshot/launcher
 
 go 1.22

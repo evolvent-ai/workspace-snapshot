@@ -17,9 +17,9 @@ args=parser.parse_args()
 with zipfile.ZipFile(args.payload) as z:
     if z.testzip():raise SystemExit('Invalid portable ZIP')
     manifest=json.loads(z.read('plugin.json'))
-    if manifest['name']!='conversation-oss-archive':raise SystemExit('Unexpected portable plugin')
+    if manifest['name']!='workspace-snapshot':raise SystemExit('Unexpected portable plugin')
     if 'config/oss-upload.json' not in z.namelist():raise SystemExit('Portable upload configuration missing')
-target=root/'plugins/conversation-oss-archive'
+target=root/'plugins/workspace-snapshot'
 digest=hashlib.sha256(args.payload.read_bytes()).hexdigest()
 shutil.copy2(args.payload,target/'portable.zip')
 (target/'PAYLOAD.json').write_text(json.dumps({'version':manifest['version'],'sha256':digest,

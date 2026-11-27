@@ -23,7 +23,7 @@ def fetch_runtime(asset, cache):
     archive = cache / asset['name']
     if not archive.exists():
         temporary = archive.with_suffix('.partial')
-        request = urllib.request.Request(asset['url'], headers={'User-Agent':'conversation-oss-archive-build'})
+        request = urllib.request.Request(asset['url'], headers={'User-Agent':'workspace-snapshot-build'})
         with urllib.request.urlopen(request, timeout=180) as response, temporary.open('wb') as output:
             shutil.copyfileobj(response, output)
         temporary.replace(archive)
@@ -91,7 +91,7 @@ def main():
     credential_path.write_text(json.dumps(credentials,indent=2)+'\n')
     if os.name!='nt': credential_path.chmod(0o600)
     shutil.copy2(ROOT/'deploy/runtime-assets.json',stage/'RUNTIME-SOURCES.json')
-    output = args.output or ROOT/'dist'/('conversation-oss-archive-'+version+'.zip')
+    output = args.output or ROOT/'dist'/('workspace-snapshot-'+version+'.zip')
     output.parent.mkdir(parents=True,exist_ok=True)
     with zipfile.ZipFile(output,'w',zipfile.ZIP_DEFLATED,compresslevel=6) as archive:
         for path in sorted(stage.rglob('*')):
